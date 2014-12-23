@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Video</title>
+	<link href="./lib/bootstrap-treeview/bootstrap-treeview.min.css" rel="stylesheet">
+	<link href="./lib/bootstrap-calendar/calendar.min.css" rel="stylesheet">
+	<style type="text/css">
+	#treelist {
+		text-align: left;
+	}
+	</style>
+</head>
+<body>
+<div class="container">
+	<h1>Video Page</h1>
+	<div class="col-md-3" id="treelist">
+	</div>
+	<div class="col-md-8" id="calendar">
+	</div>
+	<div class="col-md-8" id="videoshow">
+	</div>
+</div>
+
+<script src="./lib/bootstrap-treeview/bootstrap-treeview.min.js"></script>
+<script src="./lib/bootstrap-calendar/calendar.min.js"></script>
+<script src="./lib/underscore/underscore-min.js"></script>
+<script>
+
+var URL_CONFIGLIST = "./Servlet/GetConfigServlet";
+var URL_VIDEO = "./Servlet/GetVideoServlet";
+
+$(document).ready(function() {
+	var grouplist = [];
+	$.getJSON(URL_CONFIGLIST, function(data) {
+		if (data.code == 200) {
+			data.list.forEach(function(obj, index, list) {
+				var group = {};
+				group.text = obj.group;
+				group.selectable = false;
+				group.nodes = [];
+				obj.list.forEach(function(innerobj, innerindex, innerlist) {
+					var camera = {};
+					camera.text = innerobj.title;
+					camera.number = innerobj.number;
+					camera.model = innerobj.model;
+					camera.address = innerobj.address;
+					camera.group = obj.group;
+					group.nodes.push(camera);
+				});
+				grouplist.push(group);
+			});
+			
+		} else {
+			alert(JSON.stringify(data));
+		}
+	}).fail(function(data) {
+		if (data.responseJSON)
+			alert(JSON.stringify(data.responseJSON));
+		else
+			alert("Server Error");
+	}).complete(function() {
+		if (grouplist.length == 0)
+			alert("No IPCamera");
+		$('#treelist').treeview({data: grouplist, levels: 0});
+		$('#treelist').on('nodeSelected', function(event, node) {
+			console.log(JSON.stringify(node));
+		});
+		$("body").disableSelection();
+	});
+});
+
+</script>
+</body>
+</html>

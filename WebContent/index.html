@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	
+	<title>NVRCenter</title>
+	<!-- Bootstrap core CSS -->
+	<link href="./lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+	<link href="./lib/bootstrap/css/docs.min.css" rel="stylesheet">
+	
+	<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+	<!--[if lt IE 9]>
+		<script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+		<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	<link href="./main.css" rel="stylesheet">
+</head>
+
+<body>
+	<!-- /.header -->
+	<header>
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="">NVRCenter</a>
+				</div>
+			
+				<!-- .nav-collapse -->
+				<div id="navbar" class="collapse navbar-collapse">
+					<ul class="nav navbar-nav navbar-left">
+						<li><a href="#monitor" data-toggle="tooltip" data-placement="bottom" title="Monitor">
+							<span class="glyphicon glyphicon-facetime-video"></span>
+						</a></li>
+						<li><a href="#video" data-toggle="tooltip" data-placement="bottom" title="Video">
+							<span class="glyphicon glyphicon-film"></span>
+						</a></li>
+						<li><a href="#admin" data-toggle="tooltip" data-placement="bottom" title="Configure">
+							<span class="glyphicon glyphicon-cog"></span>
+						</a></li>
+						<li><a href="#log" data-toggle="tooltip" data-placement="bottom" title="Log">
+							<span class="glyphicon glyphicon-list-alt"></span>
+						</a></li>
+						<li><a href="#contact" data-toggle="tooltip" data-placement="bottom" title="Contact">
+							<span class="glyphicon glyphicon-envelope"></span>
+						</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li id="logout"><a data-toggle="tooltip" data-placement="bottom" title="Logout">
+							<span class="glyphicon glyphicon-log-out"></span>
+						</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<!-- /.container -->
+	<div class="tab-content">
+		<div id="monitor" role="tabpanel" class="starter-template tab-pane active"></div>
+		<div id="video" role="tabpanel" class="starter-template tab-pane"></div>
+		<div id="admin" role="tabpanel" class="starter-template tab-pane"></div>
+		<div id="log" role="tabpanel" class="starter-template tab-pane"></div>
+	</div>
+	
+	<!-- /#login -->
+	<div id="login" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<!-- /container -->
+			<div class="modal-content">
+				<form class="form-signin" role="form">
+					<h2 class="form-signin-heading">Please sign in</h2>
+					<label for="inputUser" class="sr-only">User</label>
+					<input type="text" id="inputUser" class="form-control" placeholder="Username" required autofocus>
+					<label for="inputPassword" class="sr-only">Password</label>
+					<input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+					<!-- 
+					<div class="checkbox">
+						<label>
+							<input type="checkbox" value="remember-me"> Remember me
+						</label>
+					</div>
+					 -->
+					<button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+				</form>
+			</div> 
+		</div>
+	</div>
+	
+	<!-- Bootstrap core JavaScript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="./lib/jquery/jquery-1.11.1.min.js"></script>
+	<script src="./lib/jquery-ui/jquery-ui-1.10.3.custom.min.js"></script>
+	<script src="./lib/bootstrap/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="./lib/bootstrap/assets/js/ie10-viewport-bug-workaround.js"></script>
+	
+	<script src="./main.js"></script>
+</body>
+
+</html>

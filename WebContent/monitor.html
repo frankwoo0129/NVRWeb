@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Monitor</title>
+	<link href="./monitor.css" rel="stylesheet">
+</head>
+<body>
+
+<!-- monitor container -->
+<div class="container">
+	<!-- Tab -->
+	<ul class="nav nav-tabs" id="myTab">
+		<li role="presentation" class="pull-right dropdown">
+			<button class="button button-default dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true">
+				View <span class="caret"></span> 
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a id="3">3x2</a></li>
+				<li><a id="4">4x3</a></li>
+				<li><a id="6">6x5</a></li>
+			</ul>
+		</li>
+	</ul>
+	
+	<!-- Tab panes -->
+	<div class="tab-content"></div>
+	
+	<!-- Pager -->
+	<ul class="pager">
+		<li class="previous">
+			<a href="#prev">
+				<span aria-hidden="true">&larr;</span>
+				<span>Previous</span>
+			</a>
+		</li>
+		<li class="next">
+			<a href="#next">
+				<span>Next</span>
+				<span aria-hidden="true">&rarr;</span>
+			</a>
+		</li>
+	</ul>
+				
+	<!-- zoom in -->
+	<div class="modal fade zoomin" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">
+						<span aria-hidden="true">&times;</span>
+						<span class="sr-only">Close</span>
+					</button>
+					<h4 class="modal-title"></h4> 
+				</div>
+				<div class="modal-body">
+					<img src="" width='100%' alt="...">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>
+
+<script src="./monitor.js"></script>
+
+</body>
+</html>

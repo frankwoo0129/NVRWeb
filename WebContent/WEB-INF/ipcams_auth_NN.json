@@ -1,0 +1,15 @@
+[
+	{
+		"user":"admin",
+		"passwd":"admin!qaz2wsx",
+		"roles":["all"]
+	},{
+		"user":"guest",
+		"passwd":"guest1234!!",
+		"roles":["all"]
+	},{
+		"user":"2F",
+		"passwd":"2F",
+		"roles":["B04-2F"]
+	}
+]
