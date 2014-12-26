@@ -4,7 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Video</title>
 	<link href="./lib/bootstrap-treeview/bootstrap-treeview.min.css" rel="stylesheet">
-	<link href="./lib/bootstrap-calendar/calendar.min.css" rel="stylesheet">
+	<link href="./lib/fullcalendar-2.2.3/fullcalendar.min.css" rel="stylesheet">
 	<style type="text/css">
 	#treelist {
 		text-align: left;
@@ -13,7 +13,6 @@
 </head>
 <body>
 <div class="container">
-	<h1>Video Page</h1>
 	<div class="col-md-3" id="treelist">
 	</div>
 	<div class="col-md-8" id="calendar">
@@ -23,12 +22,36 @@
 </div>
 
 <script src="./lib/bootstrap-treeview/bootstrap-treeview.min.js"></script>
-<script src="./lib/bootstrap-calendar/calendar.min.js"></script>
-<script src="./lib/underscore/underscore-min.js"></script>
+<script src="./lib/fullcalendar-2.2.3/lib/moment.min.js"></script>
+<script src="./lib/fullcalendar-2.2.3/fullcalendar.min.js"></script>
+
 <script>
 
 var URL_CONFIGLIST = "./Servlet/GetConfigServlet";
-var URL_VIDEO = "./Servlet/GetVideoServlet";
+var URL_VIDEOLIST = "./Servlet/GetVideoServlet";
+var selectedNode = null;
+
+function loadEvent() {
+	var view = $('#calendar').fullCalendar('getView');
+	if (view && view.name === 'basicDay' && selectedNode) {
+		var url = URL_VIDEOLIST + "/" + selectedNode.address + "/" + view.start.format('YYYYMMdd') + "/0000/2400";
+		$.getJSON(url, function(data) {
+			if (data.code == 200) {
+				data.list.forEach(function(obj, index, list) {
+					var event = {title: obj.title, start: view.start};
+					$('#calendar').fullCalendar('renderEvent', event);
+				});
+			} else {
+				alert(JSON.stringify(data));
+			}
+		}).fail(function(data) {
+			if (data.responseJSON)
+				alert(JSON.stringify(data.responseJSON));
+			else
+				alert("Server Error");
+		});
+	}
+};
 
 $(document).ready(function() {
 	var grouplist = [];
@@ -46,11 +69,11 @@ $(document).ready(function() {
 					camera.model = innerobj.model;
 					camera.address = innerobj.address;
 					camera.group = obj.group;
+					camera.selectable = true;
 					group.nodes.push(camera);
 				});
 				grouplist.push(group);
 			});
-			
 		} else {
 			alert(JSON.stringify(data));
 		}
@@ -64,7 +87,27 @@ $(document).ready(function() {
 			alert("No IPCamera");
 		$('#treelist').treeview({data: grouplist, levels: 0});
 		$('#treelist').on('nodeSelected', function(event, node) {
-			console.log(JSON.stringify(node));
+			selectedNode = node;
+			$('#calendar').fullCalendar('removeEvents');
+			loadEvent();
+		});
+		$('#calendar').fullCalendar({
+			header: {
+				left:   'prev,next',
+				center: 'title',
+				right:  'today month'
+			},
+			selectable: true,
+			select: function(start, end) {
+				$('#calendar').fullCalendar('gotoDate', start);
+				$('#calendar').fullCalendar('changeView', 'basicDay');
+			},
+			viewRender: function(view, element) {
+				loadEvent();
+			},
+			viewDestroy: function(view, element) {
+				$('#calendar').fullCalendar('removeEvents');
+			}
 		});
 		$("body").disableSelection();
 	});
